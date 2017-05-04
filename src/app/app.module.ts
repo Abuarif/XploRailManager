@@ -9,13 +9,16 @@ import { Scan } from '../pages/scan/scan';
 import { ScanResult } from '../pages/scan-result/scan-result';
 import { Logs } from '../pages/logs/logs';
 import { Settings } from '../pages/settings/settings';
+import { Setting } from '../pages/setting/setting';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { Api } from '../providers/api';
+import { DataApi } from '../providers/data-api';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -26,10 +29,12 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     ScanResult,
     Logs,
     Settings,
+    Setting,
     TabsPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -40,6 +45,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     ScanResult,
     Logs,
     Settings,
+    Setting,
     HomePage,
     TabsPage
   ],
@@ -48,6 +54,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     SplashScreen,
     BarcodeScanner,
     Api,
+    DataApi,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

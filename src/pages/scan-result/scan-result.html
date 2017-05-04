@@ -1,13 +1,37 @@
-
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ScanResult</ion-title>
+    <ion-title>Scan Result</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="Scan-result">
+  <ion-row>
+    <ion-col width-100>
+    </ion-col>
+  </ion-row>
 
+
+  <form (ngSubmit)="submitBarcode()">
+    <ion-row>
+      <ion-col width-100>
+        <h6 class="Scan-align">Barcode Text: {{scannedText}}</h6>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col width-100>
+        <h6 class="Scan-align">Reason:
+          <select [(ngModel)]="selectedCountry.id" name="selectedCountry">
+            <option *ngFor="let country of countries" value= {{country.id}}>{{country.name}}</option>
+          </select>
+        </h6>
+      </ion-col>
+    </ion-row>
+    <br>
+    <br>
+    <button type="submit" ion-button color="primary" block *ngIf="isAvailableServer === true ">Submit</button>
+  </form>
 </ion-content>

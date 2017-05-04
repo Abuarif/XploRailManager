@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ScanResult } from "../scan-result/scan-result";
+import { Http } from '@angular/http';
 // import { Login } from "../login/login";
 
 @IonicPage()
 @Component({
   selector: 'page-scan',
   templateUrl: 'scan.html',
+  providers: [Http]
 })
 export class Scan {
 
@@ -18,11 +20,13 @@ export class Scan {
   private eventId: number;
   public eventTitle: string;
   public location: string = '...';
+  public token: string = 'test';
   public locations: any = ['Event Registration', 'Goodies Collection', 'Check Point 1', 'Check Point 2', 'Check Point 3', 'Check Point 4', 'Check Point 5'];
 
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
+    public alertCtrl: AlertController,
     private barcodeScanner: BarcodeScanner) {
   }
 
@@ -34,6 +38,8 @@ export class Scan {
     }
 
     if (!localStorage.getItem("location")) {
+      this.showAlert();
+    } else {
       this.location = localStorage.getItem("location");
     }
     this.eventId = this.navParams.get('eventId');
@@ -55,7 +61,7 @@ export class Scan {
         return false;
       }
       console.log("Scanned successfully!");
-      console.log(barcodeData);
+      console.log(JSON.stringify(barcodeData));
       this.goToResult(barcodeData);
     }, (err) => {
       console.log(err);
@@ -63,13 +69,24 @@ export class Scan {
   }
 
   private goToResult(barcodeData) {
+    console.log('gotoResult...');
     this.navCtrl.push(ScanResult, {
-      scannedText: barcodeData.text
+      scannedText: barcodeData.text,
+      location: this.location
     });
   }
 
   public setLocation(id) {
     this.location = this.locations[id];
     localStorage.setItem('location', this.location);
+  }
+
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Alert!',
+      subTitle: 'Please specify your current location / event!',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

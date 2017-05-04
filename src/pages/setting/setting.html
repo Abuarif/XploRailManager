@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>setting</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p>Please Enter Server Path</p>
+  <form (ngSubmit)="setup()" [formGroup]="settingFormControl">
+    <ion-list inset>
+      <ion-item>
+        <ion-label>Server Path :</ion-label>
+        <ion-input type="serverPath" formControlName="serverPath"></ion-input>
+      </ion-item>
+      <br>
+      <br>
+      <button type="submit" ion-button color="primary" block>Setup</button>
+    </ion-list>
+  </form>
+
+</ion-content>
