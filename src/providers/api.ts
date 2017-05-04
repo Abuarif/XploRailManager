@@ -1,18 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the Api provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Api {
 
-  constructor(public http: Http) {
-    console.log('Hello Api Provider');
+  constructor(private http: Http) {}
+
+  public signin(ipAddr, username, password) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+      this.http.post(ipAddr+'/api/web_login', { username: username, password: password }, {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
   }
 
+  public submitBarcode(token, location, text, reason) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Authorization', localStorage.getItem("token"));
+
+      this.http.post(localStorage.getItem('serverPath')+'/api/barcode', { token: token, location: location,text: text, reason: reason }, {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }
