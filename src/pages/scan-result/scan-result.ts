@@ -15,6 +15,7 @@ export class ScanResult {
   public scannedText: string;
   public location: string;
   public token: string;
+  public user_id: string;
   public isAvailableServer: boolean = false;
   selectedCountry:Country = new Country(1, 'Start');
   countries = [
@@ -34,6 +35,7 @@ export class ScanResult {
     this.scannedText = this._navParams.get("scannedText");
     this.location = this._navParams.get("location");
     this.token = this._navParams.get("token");
+    this.user_id = this._navParams.get("user_id");
     if (!localStorage.getItem('serverPath')) {
       this.showAlert();
     } else {
@@ -50,7 +52,7 @@ export class ScanResult {
     loading.present();
 
     //Submit Barcode
-    this._api.submitBarcode(this.token, this.location, this.scannedText, this.selectedCountry.id).then((result) => {
+    this._api.submitBarcode(this.token, this.location, this.scannedText, this.selectedCountry.id, this.user_id).then((result) => {
       loading.dismiss();
       this.data = result;
       console.log(this.data);

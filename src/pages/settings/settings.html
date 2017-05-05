@@ -19,4 +19,23 @@
       <ion-label> {{ serverPath }} </ion-label>
     </ion-item>
   </ion-list>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>Token : </ion-label>
+      <ion-label> {{ token }} </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>User Id : </ion-label>
+      <ion-label> {{ user_id }} </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>Scanning Location : </ion-label>
+      <ion-label> {{ location }} </ion-label>
+    </ion-item>
+  </ion-list>
+  <button ion-button full color="danger" (click)="logout()">Log Out</button>
 </ion-content>

@@ -8,6 +8,7 @@ export class DataApi {
     serverPath: '',
     token: '',
     location: '',
+    user_id: '',
     email:''
   };
 
@@ -44,6 +45,8 @@ export class DataApi {
       this.data.serverPath = temp;
     } else if (key == 'token') {
       this.data.token = temp;
+    } else if (key == 'user_id') {
+      this.data.user_id = temp;
     } else if (key == 'location') {
       this.data.location = temp;
     }

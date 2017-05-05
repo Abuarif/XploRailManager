@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ScanResult } from "../scan-result/scan-result";
 import { Http } from '@angular/http';
-// import { Login } from "../login/login";
+import { Login } from "../login/login";
 
 @IonicPage()
 @Component({
@@ -34,7 +34,7 @@ export class Scan {
     console.log('ionViewDidLoad ScanPage');
 
     if (!localStorage.getItem("token")) {
-      // this.navCtrl.push(Login);
+      this.navCtrl.push(Login);
     }
 
     if (!localStorage.getItem("location")) {

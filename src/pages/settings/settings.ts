@@ -11,6 +11,9 @@ import { DataApi } from '../../providers/data-api';
 })
 export class Settings {
   private serverPath: string;
+  private location: string;
+  private token: string;
+  private user_id: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public dataApi: DataApi) {
   }
@@ -22,6 +25,9 @@ export class Settings {
       this.navCtrl.push(Setting);
     }
     this.serverPath = this.dataApi.get('serverPath');
+    this.location = this.dataApi.get('location');
+    this.user_id = this.dataApi.get('user_id');
+    this.token = this.dataApi.get('token');
     console.log('ServerPath: ' + this.serverPath);
   }
 
@@ -37,5 +43,9 @@ export class Settings {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  logout() {
+    this.dataApi.flush();
   }
 }

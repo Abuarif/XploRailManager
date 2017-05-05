@@ -12,7 +12,7 @@ export class Api {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
 
-      this.http.post(ipAddr+'/api/web_login', { username: username, password: password }, {headers: headers})
+      this.http.get(ipAddr+'/api/signin.json?username=' + username + '&password=' + password, {headers: headers})
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
@@ -21,12 +21,12 @@ export class Api {
     });
   }
 
-  public submitBarcode(token, location, text, reason) {
+  public submitBarcode(token, location, text, reason, user_id) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Authorization', localStorage.getItem("token"));
 
-      this.http.post(localStorage.getItem('serverPath')+'/api/barcode', { token: token, location: location,text: text, reason: reason }, {headers: headers})
+      this.http.get(localStorage.getItem('serverPath')+'/api/attendance?token=' + token + '&location=' + location + '&text=' + text + '&reason=' + reason + '&user_id=' + user_id , {headers: headers})
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
