@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ScanResult } from "../scan-result/scan-result";
 import { Http } from '@angular/http';
 import { Login } from "../login/login";
+import { Settings } from '../settings/settings';
+
+import { Api } from '../../providers/api';
+import { DataApi } from '../../providers/data-api';
 
 @IonicPage()
 @Component({
@@ -15,49 +19,51 @@ import { Login } from "../login/login";
 export class Scan {
 
   public scannedText: string;
-  public buttonText: string;
-  public loading: boolean;
-  private eventId: number;
-  public eventTitle: string;
-  public location: string = '...';
+  public startText: string;
+  public endText: string;
+  public startButton: boolean;
+  public endButton: boolean;
+  public location: string = '';
   public token: string = 'test';
-  public locations: any = ['Event Registration', 'Goodies Collection', 'Check Point 1', 'Check Point 2', 'Check Point 3', 'Check Point 4', 'Check Point 5'];
+  public user_id: string;
+
+  public data: any;
 
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
     public alertCtrl: AlertController,
-    private barcodeScanner: BarcodeScanner) {
+    private barcodeScanner: BarcodeScanner,
+    private _loadingController: LoadingController,
+    private _api: Api,
+    private dataApi: DataApi
+  ) {
+    this.location = this.dataApi.get('location');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ScanPage');
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter ScanPage');
 
-    if (!localStorage.getItem("token")) {
-      this.navCtrl.push(Login);
+    if (!this.dataApi.data.location) {
+      this.navCtrl.push(Settings); ``
     }
-
-    if (!localStorage.getItem("location")) {
-      this.showAlert();
-    } else {
-      this.location = localStorage.getItem("location");
-    }
-    this.eventId = this.navParams.get('eventId');
-    this.eventTitle = this.navParams.get('eventTitle');
-
-    this.buttonText = "Scan";
-    this.loading = false;
+    this.location = this.dataApi.get('location');
+    this.user_id = this.dataApi.get('user_id');
+    this.token = this.dataApi.get('token');
   }
 
   public scanQR() {
-    // this.buttonText = "Loading..";
-    this.loading = false;
+    if (!this.token) {
+      this.navCtrl.push(Login);
+    }
+    this.startButton = false;
+    this.endButton = false;
 
     this.barcodeScanner.scan().then((barcodeData) => {
       if (barcodeData.cancelled) {
         console.log("User cancelled the action!");
-        this.buttonText = "Scan";
-        this.loading = false;
+        this.startButton = false;
+        this.endButton = false;
         return false;
       }
       console.log("Scanned successfully!");
@@ -71,22 +77,25 @@ export class Scan {
   private goToResult(barcodeData) {
     console.log('gotoResult...');
     this.navCtrl.push(ScanResult, {
-      scannedText: barcodeData.text,
-      location: this.location
+      scannedText: barcodeData.text
     });
   }
-
-  public setLocation(id) {
-    this.location = this.locations[id];
-    localStorage.setItem('location', this.location);
-  }
-
   showAlert() {
     let alert = this.alertCtrl.create({
       title: 'Alert!',
-      subTitle: 'Please specify your current location / event!',
+      subTitle: 'Please configure your application Settings!',
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  getLocation() {
+    let status: boolean = true;
+    if (!this.location) {
+      status = true;
+    } else {
+      status = false;
+    }
+    return status;
   }
 }

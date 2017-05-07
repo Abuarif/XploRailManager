@@ -17,6 +17,7 @@ export class Login {
     email: '',
     password: ''
   };
+  
   public loginFormControl: FormGroup;
   private data: any;
   // private host: string = 'https://mtas.prasarana.com.my/explorail';
@@ -36,6 +37,16 @@ export class Login {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  ionViewWillLeave() {
+    console.log('ionViewWillLeave LoginPage');
+    if (!this.data) {
+      alert('Abort Login');
+    } else {
+    this.dataApi.update('token', this.data.key);
+    this.dataApi.update('user_id', this.data.user_id);
+    }
   }
 
   public login() {

@@ -1,33 +1,18 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Scan QR Code</ion-title>
+    <ion-title>Game Pass Verification</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-  <div class="row">
-    <div>
-      <br>
-      <br>
-      <h5>Scan QR code for {{location}} </h5>
-    </div>
-  </div>
-  <button ion-button block color="secondary" class="Scan-button" (click)="scanQR()" [disabled]="loading">{{buttonText}}</button>
-  <ion-fab right bottom>
-    <button ion-fab color="danger"><ion-icon name="map"></ion-icon></button>
-    <ion-fab-list side="left">
-      <button ion-fab (click)="setLocation(0)"><ion-icon name="person-add"></ion-icon></button>
-      <button ion-fab (click)="setLocation(1)"><ion-icon name="basket"></ion-icon></button>
-    </ion-fab-list>
-    <ion-fab-list side="top">
-      <button ion-fab (click)="setLocation(2)"><ion-icon name="train"></ion-icon>1</button>
-      <button ion-fab (click)="setLocation(3)"><ion-icon name="train"></ion-icon>2</button>
-      <button ion-fab (click)="setLocation(4)"><ion-icon name="train"></ion-icon>3</button>
-      <button ion-fab (click)="setLocation(5)"><ion-icon name="train"></ion-icon>4</button>
-      <button ion-fab (click)="setLocation(6)"><ion-icon name="train"></ion-icon>5</button>
-    </ion-fab-list> 
-  </ion-fab>
+  <ion-row>
+    <ion-col width-100>
+      <h5>Event/Game: {{ location }} </h5>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-100>
+      <button ion-button block color="primary" (click)="scanQR()"> Scan Game Pass </button>
+    </ion-col>
+  </ion-row>
 </ion-content>

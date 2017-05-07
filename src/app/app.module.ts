@@ -9,7 +9,6 @@ import { Scan } from '../pages/scan/scan';
 import { ScanResult } from '../pages/scan-result/scan-result';
 import { Logs } from '../pages/logs/logs';
 import { Settings } from '../pages/settings/settings';
-import { Setting } from '../pages/setting/setting';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { Api } from '../providers/api';
@@ -29,7 +28,6 @@ import { HttpModule } from '@angular/http';
     ScanResult,
     Logs,
     Settings,
-    Setting,
     TabsPage
   ],
   imports: [
@@ -45,7 +43,6 @@ import { HttpModule } from '@angular/http';
     ScanResult,
     Logs,
     Settings,
-    Setting,
     HomePage,
     TabsPage
   ],

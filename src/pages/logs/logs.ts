@@ -1,24 +1,52 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
-/**
- * Generated class for the Logs page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { Api } from "../../providers/api";
+import { DataApi } from "../../providers/data-api";
+
 @IonicPage()
 @Component({
   selector: 'page-logs',
   templateUrl: 'logs.html',
 })
 export class Logs {
+  public logs: any;
+  public token: string;
+  public user_id: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public api: Api,
+    public dataApi: DataApi,
+    public _loadingController: LoadingController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Logs');
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter Logs');
+
+    this.token = this.dataApi.get('token');
+    this.user_id = this.dataApi.get('user_id');
+    this.getHistory();
   }
 
+  private getHistory() {
+    let loading = this._loadingController.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+
+    loading.present();
+
+    //Submit Barcode
+    this.api.get_submission_history(this.token, this.user_id)
+      .then((result) => {
+        loading.dismiss();
+        this.logs = result;
+      }, (err) => {
+        loading.dismiss();
+        // Display submit barcode error code
+        alert(err);
+      });
+  }
 }

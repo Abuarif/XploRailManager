@@ -7,31 +7,52 @@
 </ion-header>
 
 
-<ion-content padding class="Scan-result">
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      Last Submission
+    </ion-list-header>
+    <ion-item>
+      <h2>Group Name</h2>
+      <p> {{ lastAttendance.group }} </p>
+    </ion-item>
+    <ion-item>
+      <h2>Participant Name</h2>
+      <p> {{ lastAttendance.name }} </p>
+    </ion-item>
+    <ion-item>
+      <h2>NRIC/Passport No.</h2>
+      <p> {{ scannedText }} </p>
+    </ion-item>
+    <ion-item>
+      <h2>Last Event/Game</h2>
+      <p> {{ lastAttendance.location }} </p>
+    </ion-item>
+    <ion-item>
+      <h2>Start Time</h2>
+      <p> {{ lastAttendance.start_date }} </p>
+    </ion-item>
+    <ion-item>
+      <h2>End Time</h2>
+      <p> {{ lastAttendance.end_date }} </p>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      Current Activity
+    </ion-list-header>
+    <ion-item>
+      <h2>Event/Game</h2>
+      <p> {{ location }} </p>
+    </ion-item>
+  </ion-list>
+
   <ion-row>
-    <ion-col width-100>
+    <ion-col width-50>
+      <button ion-button block color="secondary" (click)="submitBarcode(1)" [disabled]="startButton">{{ startText }}</button>
+    </ion-col>
+    <ion-col width-50>
+      <button ion-button block color="danger" (click)="submitBarcode(2)" [disabled]="endButton">{{ endText }}</button>
     </ion-col>
   </ion-row>
-
-
-  <form (ngSubmit)="submitBarcode()">
-    <ion-row>
-      <ion-col width-100>
-        <h6 class="Scan-align">Barcode Text: {{scannedText}}</h6>
-      </ion-col>
-    </ion-row>
-    <br>
-    <ion-row>
-      <ion-col width-100>
-        <h6 class="Scan-align">Reason:
-          <select [(ngModel)]="selectedCountry.id" name="selectedCountry">
-            <option *ngFor="let country of countries" value= {{country.id}}>{{country.name}}</option>
-          </select>
-        </h6>
-      </ion-col>
-    </ion-row>
-    <br>
-    <br>
-    <button type="submit" ion-button color="primary" block *ngIf="isAvailableServer === true ">Submit</button>
-  </form>
 </ion-content>
