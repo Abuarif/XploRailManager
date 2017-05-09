@@ -71,8 +71,8 @@ export class ScanResult {
     } else {
       this.getAttendance(this.scannedText);
       this.isAvailableServer = true;
-      alert('Start: ' + this.disableStartButton);
-      alert('End: ' + this.disableEndButton);
+      // alert('Start: ' + this.disableStartButton);
+      // alert('End: ' + this.disableEndButton);
     }
   }
 
@@ -127,19 +127,19 @@ export class ScanResult {
         this.lastAttendance.name = this.attendance.name;
 
         // toggle scan-result start and end button
-        alert('log: ' + this.lastAttendance.location);
-        alert('mobile: ' + this.location);
+        // alert('log: ' + this.lastAttendance.location);
+        // alert('mobile: ' + this.location);
         if (this.lastAttendance.location === this.location) {
-          alert('Matched..');
+          // alert('Matched..');
           if (this.lastAttendance.start_date) {
-            alert('hide start');
+            // alert('hide start');
             this.disableStartButton = true;
           } else {
-            alert('hide end');
+            // alert('hide end');
             this.disableEndButton   = true;
           }
         } else {
-          alert('Not Matched..');
+          // alert('Not Matched..');
           this.disableEndButton     = true;
           this.disableStartButton   = false;
         }
