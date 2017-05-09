@@ -131,17 +131,21 @@ export class ScanResult {
         // alert('mobile: ' + this.location);
         if (this.lastAttendance.location === this.location) {
           // alert('Matched..');
-          if (this.lastAttendance.start_date) {
+          if (this.lastAttendance.start_date && (!this.lastAttendance.end_date)) {
             // alert('hide start');
             this.disableStartButton = true;
-          } else {
+          } else if ((!this.lastAttendance.start_date) && (this.lastAttendance.end_date)) {
             // alert('hide end');
-            this.disableEndButton   = true;
+            this.disableEndButton = true;
+          } else if ((this.lastAttendance.start_date) && (this.lastAttendance.end_date)) {
+            // alert('hide end');
+            this.disableStartButton = true;
+            this.disableEndButton = true;
           }
         } else {
           // alert('Not Matched..');
-          this.disableEndButton     = true;
-          this.disableStartButton   = false;
+          this.disableEndButton = true;
+          this.disableStartButton = true;
         }
       }, (err) => {
         loading.dismiss();
