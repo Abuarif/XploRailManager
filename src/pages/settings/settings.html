@@ -28,7 +28,8 @@
     <ion-item *ngIf="debug">
       <ion-label>Server</ion-label>
       <ion-select [(ngModel)]="serverPath">
-        <ion-option value="http://192.168.0.101/xplorail">Home</ion-option>
+        <ion-option value="http://192.168.0.101/xplorail">BPK</ion-option>
+        <ion-option value="http://192.168.2.1/xplorail">Macbook Wifi</ion-option>
         <ion-option value="http://10.128.48.36/xplorail">Development</ion-option>
         <ion-option value="https://explorail.prasarana.com.my/gamecenter">Production</ion-option>
       </ion-select>
@@ -43,7 +44,7 @@
       <h2>Event/Game</h2>
       <p> {{ location }} </p>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="debug">
       <h2>Server</h2>
       <p> {{ serverPath }}</p>
     </ion-item>

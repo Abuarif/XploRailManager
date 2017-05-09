@@ -32,8 +32,8 @@ export class ScanResult {
   };
   public startText: string;
   public endText: string;
-  public startButton: boolean;
-  public endButton: boolean;
+  public disableStartButton: boolean;
+  public disableEndButton: boolean;
 
   constructor(public _nav: NavController,
     private _navParams: NavParams,
@@ -47,8 +47,8 @@ export class ScanResult {
 
     this.startText = "Start";
     this.endText = "End";
-    this.startButton = false;
-    this.endButton = false;
+    this.disableStartButton = false;
+    this.disableEndButton = false;
 
     this.scannedText = this._navParams.get("scannedText");
     this.reason = this._navParams.get("reason");
@@ -71,8 +71,11 @@ export class ScanResult {
     } else {
       this.getAttendance(this.scannedText);
       this.isAvailableServer = true;
+      alert('Start: ' + this.disableStartButton);
+      alert('End: ' + this.disableEndButton);
     }
   }
+
 
   submitBarcode(reason) {
     let loading = this._loadingController.create({
@@ -109,7 +112,6 @@ export class ScanResult {
       content: "Please wait...",
       duration: 3000
     });
-
     loading.present();
 
     //Submit Barcode
@@ -124,16 +126,30 @@ export class ScanResult {
         this.lastAttendance.end_date = this.attendance.end_date;
         this.lastAttendance.name = this.attendance.name;
 
+        // toggle scan-result start and end button
+        alert('log: ' + this.lastAttendance.location);
+        alert('mobile: ' + this.location);
+        if (this.lastAttendance.location === this.location) {
+          alert('Matched..');
+          if (this.lastAttendance.start_date) {
+            alert('hide start');
+            this.disableStartButton = true;
+          } else {
+            alert('hide end');
+            this.disableEndButton   = true;
+          }
+        } else {
+          alert('Not Matched..');
+          this.disableEndButton     = true;
+          this.disableStartButton   = false;
+        }
       }, (err) => {
         loading.dismiss();
         // Display submit barcode error code
         alert(err);
       });
   }
-
-
 }
-
 
 export class Country {
   constructor(public id: number, public name: string) { }

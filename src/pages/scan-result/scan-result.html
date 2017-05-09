@@ -49,10 +49,10 @@
 
   <ion-row>
     <ion-col width-50>
-      <button ion-button block color="secondary" (click)="submitBarcode(1)" [disabled]="startButton">{{ startText }}</button>
+      <button ion-button block color="secondary" (click)="submitBarcode(1)" [disabled]="disableStartButton">{{ startText }}</button>
     </ion-col>
     <ion-col width-50>
-      <button ion-button block color="danger" (click)="submitBarcode(2)" [disabled]="endButton">{{ endText }}</button>
+      <button ion-button block color="danger" (click)="submitBarcode(2)" [disabled]="disableEndButton">{{ endText }}</button>
     </ion-col>
   </ion-row>
 </ion-content>
