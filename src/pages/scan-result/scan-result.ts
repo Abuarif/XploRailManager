@@ -32,8 +32,8 @@ export class ScanResult {
   };
   public startText: string;
   public endText: string;
-  public disableStartButton: boolean;
-  public disableEndButton: boolean;
+  public displayStartButton: boolean;
+  public displayEndButton: boolean;
 
   constructor(public _nav: NavController,
     private _navParams: NavParams,
@@ -47,8 +47,8 @@ export class ScanResult {
 
     this.startText = "Start";
     this.endText = "End";
-    this.disableStartButton = true;
-    this.disableEndButton = true;
+    this.displayStartButton = true;
+    this.displayEndButton = true;
 
     this.scannedText = this._navParams.get("scannedText");
     this.reason = this._navParams.get("reason");
@@ -71,8 +71,8 @@ export class ScanResult {
     } else {
       this.getAttendance(this.scannedText);
       this.isAvailableServer = true;
-      // alert('Start: ' + this.disableStartButton);
-      // alert('End: ' + this.disableEndButton);
+      // alert('Start: ' + this.displayStartButton);
+      // alert('End: ' + this.displayEndButton);
     }
   }
 
@@ -133,19 +133,21 @@ export class ScanResult {
           // alert('Matched..');
           if (this.lastAttendance.start_date && (!this.lastAttendance.end_date)) {
             // alert('hide start');
-            this.disableStartButton = false;
+            this.displayStartButton = false;
+            this.displayEndButton = true;
           } else if ((!this.lastAttendance.start_date) && (this.lastAttendance.end_date)) {
             // alert('hide end');
-            this.disableEndButton = false;
+            this.displayStartButton = true;
+            this.displayEndButton = false;
           } else if ((this.lastAttendance.start_date) && (this.lastAttendance.end_date)) {
             // alert('hide end');
-            this.disableStartButton = false;
-            this.disableEndButton = false;
+            this.displayStartButton = false;
+            this.displayEndButton = false;
           }
         } else {
           // alert('Not Matched..');
-          this.disableEndButton = false;
-          this.disableStartButton = false;
+          this.displayStartButton = true;
+          this.displayEndButton = false;
         }
       }, (err) => {
         loading.dismiss();
