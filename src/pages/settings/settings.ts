@@ -29,12 +29,6 @@ export class Settings {
       this.dataApi.update('token', this.token);
       this.user_id = '48';
       this.dataApi.update('user_id', this.user_id);
-    } else {
-      this.dataApi.clear('token');
-      this.dataApi.clear('user_id');
-      this.token = '';
-      this.user_id = '';
-      this.serverPath = 'https://explorail.prasarana.com.my/gamecenter';
     }
   }
 
@@ -48,9 +42,6 @@ export class Settings {
     }
     this.user_id = this.dataApi.get('user_id');
     this.token = this.dataApi.get('token');
-    console.log('ServerPath: ' + this.serverPath);
-
-    
   }
 
   showAlert() {
@@ -64,10 +55,10 @@ export class Settings {
 
   logout() {
     this.dataApi.flush();
-    this.nav.push(Login);
+    this.nav.push(Login, {serverPath: this.serverPath});
   }
 
   login() {
-    this.navCtrl.push(Login);
+    this.navCtrl.push(Login, {serverPath: this.serverPath});
   }
 }

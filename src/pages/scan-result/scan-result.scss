@@ -1,3 +1,18 @@
 page-scan-result {
-
+    .start {
+        color:blue;    
+        background-color: paleturquoise;
+        }
+    .end {
+        color:red;
+        background-color: beige;
+    }
+    .location {
+        color: purple;
+        background-color: palegoldenrod;
+    }
+    .general {
+        color: black;
+        background-color: powderblue;
+    }
 }

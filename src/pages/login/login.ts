@@ -17,7 +17,7 @@ export class Login {
     email: '',
     password: ''
   };
-  
+
   public loginFormControl: FormGroup;
   private data: any;
   // private host: string = 'https://mtas.prasarana.com.my/explorail';
@@ -30,13 +30,15 @@ export class Login {
     private dataApi: DataApi) {
     // Create FormControl to validate fields
     this.loginFormControl = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter LoginPage');
+    this.dataApi.update('serverPath', this.navParams.get("serverPath"));
+
   }
 
   ionViewWillLeave() {
@@ -44,16 +46,21 @@ export class Login {
     if (!this.data) {
       alert('Abort Login');
     } else {
-    this.dataApi.update('token', this.data.key);
-    this.dataApi.update('user_id', this.data.user_id);
+      this.dataApi.update('token', this.data.key);
+      this.dataApi.update('user_id', this.data.user_id);
     }
   }
 
   public login() {
 
     // Validation
-    if (!this.loginFormControl.valid) {
-      alert("Invalid fields!");
+    if (!this.loginFormControl.controls.email.valid) {
+      alert("Invalid username! Use full email address as username.");
+      return;
+    }
+
+    if (!this.loginFormControl.controls.password.valid) {
+      alert("Invalid password! Minimum 8 characters.");
       return;
     }
 
@@ -77,9 +84,9 @@ export class Login {
       this.data = result;
       console.log(this.data);
       // Save token and server path to localStorage
-      localStorage.setItem('token', this.data.key);
-      localStorage.setItem('user_id', this.data.user_id);
-      localStorage.setItem('serverPath', this.newUser.serverPath);
+      this.dataApi.update('token', this.data.key);
+      this.dataApi.update('user_id', this.data.user_id);
+      this.dataApi.update('serverPath', this.newUser.serverPath);
       // Close login page after successful signin
       this._nav.pop();
     }, (err) => {

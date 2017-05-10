@@ -10,8 +10,12 @@
   <form (ngSubmit)="login()" [formGroup]="loginFormControl">
     <ion-list inset>
       <ion-item>
-        <ion-label>Email :</ion-label>
+        <ion-label>Username :</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <!--<p *ngIf="!email.valid && email.touched" danger>Username is empty</p>-->
+      <ion-item *ngIf="!loginFormControl.controls.email.valid  && submitAttempt">
+        <p>Please enter a valid email address.</p>
       </ion-item>
       <ion-item>
         <ion-label>Password :</ion-label>

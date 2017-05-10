@@ -12,27 +12,27 @@
     <ion-list-header>
       Last Submission
     </ion-list-header>
-    <ion-item>
+    <ion-item class="general">
       <h2>Group Name</h2>
       <p> {{ lastAttendance.group }} </p>
     </ion-item>
-    <ion-item>
+    <ion-item class="general">
       <h2>Participant Name</h2>
       <p> {{ lastAttendance.name }} </p>
     </ion-item>
-    <ion-item>
+    <ion-item class="general">
       <h2>NRIC/Passport No.</h2>
       <p> {{ scannedText }} </p>
     </ion-item>
-    <ion-item>
+    <ion-item class="location">
       <h2>Last Event/Game</h2>
       <p> {{ lastAttendance.location }} </p>
     </ion-item>
-    <ion-item>
+    <ion-item class="start">
       <h2>Start Time</h2>
       <p> {{ lastAttendance.start_date }} </p>
     </ion-item>
-    <ion-item>
+    <ion-item class="end">
       <h2>End Time</h2>
       <p> {{ lastAttendance.end_date }} </p>
     </ion-item>
@@ -41,7 +41,7 @@
     <ion-list-header>
       Current Activity
     </ion-list-header>
-    <ion-item>
+    <ion-item class="location">
       <h2>Event/Game</h2>
       <p> {{ location }} </p>
     </ion-item>
