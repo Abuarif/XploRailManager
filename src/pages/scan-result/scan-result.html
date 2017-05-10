@@ -48,11 +48,13 @@
   </ion-list>
 
   <ion-row>
-    <ion-col width-50>
-      <button ion-button block color="secondary" (click)="submitBarcode(1)" [disabled]="disableStartButton">{{ startText }}</button>
+    <ion-col width-100>
+      <button ion-button full color="secondary" (click)="submitBarcode(1)" *ngIf="disableStartButton">{{ startText }}</button>
     </ion-col>
-    <ion-col width-50>
-      <button ion-button block color="danger" (click)="submitBarcode(2)" [disabled]="disableEndButton">{{ endText }}</button>
+  <ion-row>
+  </ion-row>
+    <ion-col width-100>
+      <button ion-button full color="danger" (click)="submitBarcode(2)" *ngIf="disableEndButton">{{ endText }}</button>
     </ion-col>
   </ion-row>
 </ion-content>

@@ -47,8 +47,8 @@ export class ScanResult {
 
     this.startText = "Start";
     this.endText = "End";
-    this.disableStartButton = false;
-    this.disableEndButton = false;
+    this.disableStartButton = true;
+    this.disableEndButton = true;
 
     this.scannedText = this._navParams.get("scannedText");
     this.reason = this._navParams.get("reason");
@@ -133,19 +133,19 @@ export class ScanResult {
           // alert('Matched..');
           if (this.lastAttendance.start_date && (!this.lastAttendance.end_date)) {
             // alert('hide start');
-            this.disableStartButton = true;
+            this.disableStartButton = false;
           } else if ((!this.lastAttendance.start_date) && (this.lastAttendance.end_date)) {
             // alert('hide end');
-            this.disableEndButton = true;
+            this.disableEndButton = false;
           } else if ((this.lastAttendance.start_date) && (this.lastAttendance.end_date)) {
             // alert('hide end');
-            this.disableStartButton = true;
-            this.disableEndButton = true;
+            this.disableStartButton = false;
+            this.disableEndButton = false;
           }
         } else {
           // alert('Not Matched..');
-          this.disableEndButton = true;
-          this.disableStartButton = true;
+          this.disableEndButton = false;
+          this.disableStartButton = false;
         }
       }, (err) => {
         loading.dismiss();
