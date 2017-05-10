@@ -25,12 +25,12 @@
       <ion-label>Test Mode</ion-label>
       <ion-toggle color="secondary" [(ngModel)]="debug" [checked]="debug"></ion-toggle>
     </ion-item>
-    <ion-item *ngIf="debug">
+    <ion-item>
       <ion-label>Server</ion-label>
       <ion-select [(ngModel)]="serverPath">
-        <ion-option value="http://192.168.0.101/xplorail">BPK</ion-option>
-        <ion-option value="http://192.168.2.1/xplorail">Macbook Wifi</ion-option>
-        <ion-option value="http://10.128.48.36/xplorail">Development</ion-option>
+        <ion-option *ngIf="debug" value="http://192.168.0.101/xplorail">BPK</ion-option>
+        <ion-option *ngIf="debug" value="http://192.168.2.1/xplorail">Macbook Wifi</ion-option>
+        <ion-option *ngIf="debug" value="http://10.128.48.36/xplorail">Development</ion-option>
         <ion-option value="http://explorail.bersepadu.com/gamecenter">Test GameCenter</ion-option>
         <ion-option value="https://explorail.prasarana.com.my/gamecenter">Live GameCenter</ion-option>
       </ion-select>
