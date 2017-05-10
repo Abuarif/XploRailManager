@@ -32,7 +32,7 @@
       <h2>Start Time</h2>
       <p> {{ lastAttendance.start_date }} </p>
     </ion-item>
-    <ion-item class="end">
+    <ion-item class="end" *ngIf="status == 'game'">
       <h2>End Time</h2>
       <p> {{ lastAttendance.end_date }} </p>
     </ion-item>
@@ -47,14 +47,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-row>
-    <ion-col width-100>
-      <button ion-button full color="secondary" (click)="submitBarcode(1)" *ngIf="displayStartButton">{{ startText }}</button>
-    </ion-col>
-  <ion-row>
-  </ion-row>
-    <ion-col width-100>
-      <button ion-button full color="danger" (click)="submitBarcode(2)" *ngIf="displayEndButton">{{ endText }}</button>
-    </ion-col>
-  </ion-row>
+  <button ion-button full large color="secondary" (click)="submitBarcode(1)" *ngIf="displayStartButton && status == 'event'">{{ eventText }}</button>
+  <button ion-button full large color="secondary" (click)="submitBarcode(1)" *ngIf="displayStartButton && status == 'game'">{{ startText }}</button>
+  <button ion-button full large color="danger" (click)="submitBarcode(2)" *ngIf="displayEndButton && status == 'game'">{{ endText }}</button>
 </ion-content>

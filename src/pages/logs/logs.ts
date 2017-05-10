@@ -24,6 +24,10 @@ export class Logs {
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter Logs');
+    if (!this.dataApi.get('debug')) {
+      this.dataApi.clear('token');
+      this.dataApi.clear('user_id');
+    }
 
     this.token = this.dataApi.get('token');
     this.user_id = this.dataApi.get('user_id');

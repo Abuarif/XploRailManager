@@ -44,6 +44,11 @@ export class Scan {
   ionViewWillEnter() {
     console.log('ionViewWillEnter ScanPage');
 
+    if (!this.dataApi.get('debug')) {
+      this.dataApi.clear('token');
+      this.dataApi.clear('user_id');
+    }
+
     if (!this.dataApi.data.location) {
       this.navCtrl.push(Settings); ``
     }
@@ -80,6 +85,14 @@ export class Scan {
       scannedText: barcodeData.text
     });
   }
+  
+  private testScan() {
+    console.log('gotoResult...');
+    this.navCtrl.push(ScanResult, {
+      scannedText: '740401016091'
+    });
+  }
+  
   showAlert() {
     let alert = this.alertCtrl.create({
       title: 'Alert!',

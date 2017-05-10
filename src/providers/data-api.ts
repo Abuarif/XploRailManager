@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataApi {
   public data = {
+    debug: '',
     serverPath: '',
     token: '',
     location: '',
@@ -48,6 +49,8 @@ export class DataApi {
     } else if (key == 'user_id') {
       this.data.user_id = temp;
     } else if (key == 'location') {
+      this.data.location = temp;
+    } else if (key == 'debug') {
       this.data.location = temp;
     }
     return temp;

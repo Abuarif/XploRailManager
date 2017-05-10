@@ -39,6 +39,11 @@ export class Login {
     console.log('ionViewWillEnter LoginPage');
     this.dataApi.update('serverPath', this.navParams.get("serverPath"));
 
+    if (!this.dataApi.get('debug')) {
+      this.dataApi.clear('token');
+      this.dataApi.clear('user_id');
+    }
+
   }
 
   ionViewWillLeave() {

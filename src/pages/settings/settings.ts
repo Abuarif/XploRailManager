@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Nav, IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { Login } from '../login/login';
+import { HomePage } from '../home/home';
 import { DataApi } from '../../providers/data-api';
 
 @IonicPage()
@@ -23,6 +24,7 @@ export class Settings {
     console.log('ionViewWillLeave Settings');
     this.dataApi.update('serverPath', this.serverPath);
     this.dataApi.update('location', this.location);
+    this.dataApi.update('debug', this.debug);
 
     if (this.debug) {
       this.token = '10010060';
@@ -55,7 +57,7 @@ export class Settings {
 
   logout() {
     this.dataApi.flush();
-    this.nav.push(Login, {serverPath: this.serverPath});
+    this.nav.popToRoot(HomePage);
   }
 
   login() {

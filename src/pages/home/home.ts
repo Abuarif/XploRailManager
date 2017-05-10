@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Chart } from 'chart.js';
 
+import { DataApi } from '../../providers/data-api';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -15,10 +17,17 @@ export class HomePage {
   bar2Chart: any;
   lineChart: any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public dataApi: DataApi) {
 
   }
 
+  ionViewWillEnter() {
+    if (!this.dataApi.get('debug')) {
+      this.dataApi.clear('token');
+      this.dataApi.clear('user_id');
+    }
+  }
+  
   ionViewDidLoad() {
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {

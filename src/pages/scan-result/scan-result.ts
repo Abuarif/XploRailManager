@@ -32,6 +32,7 @@ export class ScanResult {
   };
   public startText: string;
   public endText: string;
+  public eventText: string;
   public displayStartButton: boolean;
   public displayEndButton: boolean;
 
@@ -44,25 +45,24 @@ export class ScanResult {
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter ScanResult');
+    if (!this.dataApi.get('debug')) {
+      this.dataApi.clear('token');
+      this.dataApi.clear('user_id');
+    }
 
     this.startText = "Start";
     this.endText = "End";
+    this.eventText = "Attend";
     this.displayStartButton = true;
     this.displayEndButton = true;
 
     this.scannedText = this._navParams.get("scannedText");
     this.reason = this._navParams.get("reason");
-    this.location = this.dataApi.data.location;
+    this.location = this.dataApi.get('location');
     if (this.location == 'Goodies Collection' || this.location == 'Event Registration') {
-      if (this.reason == 1) {
-        this.status = 'Attend Event';
-      }
+        this.status = 'event';
     } else {
-      if (this.reason == 1) {
-        this.status = 'Start Game';
-      } else {
-        this.status = 'End Game';
-      }
+        this.status = 'game';
     }
     this.token = this.dataApi.data.token;
     this.user_id = this.dataApi.data.user_id;
@@ -71,8 +71,6 @@ export class ScanResult {
     } else {
       this.getAttendance(this.scannedText);
       this.isAvailableServer = true;
-      // alert('Start: ' + this.displayStartButton);
-      // alert('End: ' + this.displayEndButton);
     }
   }
 
