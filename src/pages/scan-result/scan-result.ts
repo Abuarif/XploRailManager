@@ -27,6 +27,7 @@ export class ScanResult {
     group: '',
     location: '',
     name: '',
+    nric: '',
     start_date: '',
     end_date: ''
   };
@@ -60,9 +61,9 @@ export class ScanResult {
     this.reason = this._navParams.get("reason");
     this.location = this.dataApi.get('location');
     if (this.location == 'Goodies Collection' || this.location == 'Event Registration') {
-        this.status = 'event';
+      this.status = 'event';
     } else {
-        this.status = 'game';
+      this.status = 'game';
     }
     this.token = this.dataApi.data.token;
     this.user_id = this.dataApi.data.user_id;
@@ -123,11 +124,15 @@ export class ScanResult {
         this.lastAttendance.start_date = this.attendance.start_date;
         this.lastAttendance.end_date = this.attendance.end_date;
         this.lastAttendance.name = this.attendance.name;
+        this.lastAttendance.nric = this.attendance.nric;
 
         // toggle scan-result start and end button
         // alert('log: ' + this.lastAttendance.location);
         // alert('mobile: ' + this.location);
-        if (this.lastAttendance.location === this.location) {
+        if (
+          (this.lastAttendance.location === this.location) &&
+          (this.lastAttendance.nric === scannedText)
+        ) {
           // alert('Matched..');
           if (this.lastAttendance.start_date && (!this.lastAttendance.end_date)) {
             // alert('hide start');
@@ -166,6 +171,7 @@ export class Attendance {
   public end_date: string;
   public user_id: number;
   public name: string;
+  public nric: string;
 
   constructor(public data: any) {
     this.group = data.group;
@@ -174,5 +180,6 @@ export class Attendance {
     this.end_date = data.end_date;
     this.user_id = data.user_id;
     this.name = data.name;
+    this.nric = data.nric;
   }
 }
