@@ -70,7 +70,7 @@ export class ScanResult {
     if (!localStorage.getItem('serverPath')) {
       this.showAlert();
     } else {
-      this.getAttendance(this.scannedText);
+      this.getRecord();
       this.isAvailableServer = true;
     }
   }
@@ -106,7 +106,51 @@ export class ScanResult {
     alert.present();
   }
 
-  private getAttendance(scannedText) {
+  private getAttendance(refresher) {
+    
+
+    //Submit Barcode
+    this._api.getAttendance(this.token, this.scannedText, this.user_id)
+      .then((result) => {
+        refresher.complete();
+        this.attendance = new Attendance(result);
+
+        this.lastAttendance.group = this.attendance.group;
+        this.lastAttendance.location = this.attendance.location;
+        this.lastAttendance.start_date = this.attendance.start_date;
+        this.lastAttendance.end_date = this.attendance.end_date;
+        this.lastAttendance.name = this.attendance.name;
+        this.lastAttendance.nric = this.attendance.nric;
+
+        if (
+          (this.lastAttendance.location === this.location) &&
+          (this.lastAttendance.nric === this.scannedText)
+        ) {
+          // alert('Matched..');
+          if (this.lastAttendance.start_date && (!this.lastAttendance.end_date)) {
+            // alert('hide start');
+            this.displayStartButton = false;
+            this.displayEndButton = true;
+          } else if ((!this.lastAttendance.start_date) && (this.lastAttendance.end_date)) {
+            // alert('hide end');
+            this.displayStartButton = true;
+            this.displayEndButton = false;
+          } else if ((this.lastAttendance.start_date) && (this.lastAttendance.end_date)) {
+            // alert('hide end');
+            this.displayStartButton = false;
+            this.displayEndButton = false;
+          }
+        } else {
+          // alert('Not Matched..');
+          this.displayStartButton = true;
+          this.displayEndButton = false;
+        }
+      }, (err) => {
+        refresher.complete();
+        alert(err);
+      });
+  }
+  private getRecord() {
     let loading = this._loadingController.create({
       content: "Please wait...",
       duration: 3000
@@ -114,7 +158,7 @@ export class ScanResult {
     loading.present();
 
     //Submit Barcode
-    this._api.getAttendance(this.token, scannedText, this.user_id)
+    this._api.getAttendance(this.token, this.scannedText, this.user_id)
       .then((result) => {
         loading.dismiss();
         this.attendance = new Attendance(result);
@@ -126,12 +170,9 @@ export class ScanResult {
         this.lastAttendance.name = this.attendance.name;
         this.lastAttendance.nric = this.attendance.nric;
 
-        // toggle scan-result start and end button
-        // alert('log: ' + this.lastAttendance.location);
-        // alert('mobile: ' + this.location);
         if (
           (this.lastAttendance.location === this.location) &&
-          (this.lastAttendance.nric === scannedText)
+          (this.lastAttendance.nric === this.scannedText)
         ) {
           // alert('Matched..');
           if (this.lastAttendance.start_date && (!this.lastAttendance.end_date)) {
@@ -154,7 +195,6 @@ export class ScanResult {
         }
       }, (err) => {
         loading.dismiss();
-        // Display submit barcode error code
         alert(err);
       });
   }

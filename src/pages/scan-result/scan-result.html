@@ -12,6 +12,10 @@
     <ion-list-header>
       Last Submission
     </ion-list-header>
+    <ion-refresher (ionRefresh)="getAttendance($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
     <ion-item class="general">
       <h2>Group Name</h2>
       <p> {{ lastAttendance.group }} </p>
