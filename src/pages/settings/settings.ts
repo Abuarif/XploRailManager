@@ -11,7 +11,7 @@ import { DataApi } from '../../providers/data-api';
   templateUrl: 'settings.html',
 })
 export class Settings {
-  private serverPath: string = 'https://explorail.prasarana.com.my/gamecenter';
+  private serverPath: string = 'https://explorail.rapidkl.com.my/gamecenter';
   private location: string = '';
   private token: string;
   private user_id: string;

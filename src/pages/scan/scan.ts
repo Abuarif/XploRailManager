@@ -86,13 +86,6 @@ export class Scan {
     });
   }
   
-  private testScan() {
-    console.log('gotoResult...');
-    this.navCtrl.push(ScanResult, {
-      scannedText: '740401016091'
-    });
-  }
-  
   showAlert() {
     let alert = this.alertCtrl.create({
       title: 'Alert!',
