@@ -47,10 +47,18 @@ export class Logs {
       .then((result) => {
         loading.dismiss();
         this.logs = result;
+        this.parseLog();
       }, (err) => {
         loading.dismiss();
         // Display submit barcode error code
         alert(err);
       });
+  }
+
+  private parseLog() {
+    this.logs.forEach(element => {
+      let diffInMs: number = Date.parse(element.Attendance.end_date) - Date.parse(element.Attendance.start_date);
+      element.Attendance.duration = diffInMs / 1000  ;
+    });
   }
 }

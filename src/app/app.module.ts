@@ -18,6 +18,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { HttpModule } from '@angular/http';
+import { SecondsToTimePipe } from '../pipes/seconds-to-time/seconds-to-time';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HttpModule } from '@angular/http';
     ScanResult,
     Logs,
     Settings,
-    TabsPage
+    TabsPage,
+    SecondsToTimePipe
   ],
   imports: [
     BrowserModule,
