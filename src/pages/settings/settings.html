@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-fab right bottom *ngIf="!debug">
+    <button ion-fab color="danger" *ngIf="token" (click)="logout()"><ion-icon name="log-out"></ion-icon></button>
+    <button ion-fab color="primary" *ngIf="!token" (click)="login()"><ion-icon name="log-in"></ion-icon></button>
+  </ion-fab>
   <ion-list>
     <ion-list-header>
       Settings
@@ -21,17 +25,6 @@
         <ion-option value="Check Point 5">Check Point 5</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item>
-      <ion-label>Test Mode</ion-label>
-      <ion-toggle color="secondary" [(ngModel)]="debug" [checked]="debug"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-label>Server</ion-label>
-      <ion-select [(ngModel)]="serverPath">
-        <ion-option value="http://explorail.bersepadu.com/gamecenter">Test GameCenter</ion-option>
-        <ion-option value="https://explorail.rapidkl.com.my/gamecenter">Live GameCenter</ion-option>
-      </ion-select>
-    </ion-item>
 
   </ion-list>
   <ion-list>
@@ -42,21 +35,5 @@
       <h2>Event/Game</h2>
       <p> {{ location }} </p>
     </ion-item>
-    <ion-item *ngIf="debug">
-      <h2>Server</h2>
-      <p> {{ serverPath }}</p>
-    </ion-item>
-    <ion-item *ngIf="debug">
-      <h2>Token</h2>
-      <p> {{ token }} </p>
-    </ion-item>
-    <ion-item *ngIf="debug">
-      <h2>User Id</h2>
-      <p> {{ user_id }} </p>
-    </ion-item>
   </ion-list>
-  <ion-fab right bottom *ngIf="!debug">
-    <button ion-fab color="danger" *ngIf="token" (click)="logout()"><ion-icon name="log-out"></ion-icon></button>
-    <button ion-fab color="primary" *ngIf="!token" (click)="login()"><ion-icon name="log-in"></ion-icon></button>
-  </ion-fab>
 </ion-content>
