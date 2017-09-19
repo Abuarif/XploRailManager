@@ -24,9 +24,11 @@ export class Scan {
   public startButton: boolean;
   public endButton: boolean;
   public location: string = '';
+  public name: string = '';
   public token: string = 'test';
   public user_id: string;
 
+  public logs: any;
   public data: any;
 
   constructor(
@@ -35,7 +37,7 @@ export class Scan {
     public alertCtrl: AlertController,
     private barcodeScanner: BarcodeScanner,
     private _loadingController: LoadingController,
-    private _api: Api,
+    private api: Api,
     private dataApi: DataApi
   ) {
     this.location = this.dataApi.get('location');
@@ -55,6 +57,14 @@ export class Scan {
     this.location = this.dataApi.get('location');
     this.user_id = this.dataApi.get('user_id');
     this.token = this.dataApi.get('token');
+    this.name = this.dataApi.get('name');
+    if (!this.token) {
+      this.navCtrl.push(Login);
+    }
+    if (this.location == null) {
+      this.navCtrl.push(Settings);
+    }
+    this.getLog();
   }
 
   public scanQR() {
@@ -85,7 +95,7 @@ export class Scan {
       scannedText: barcodeData.text
     });
   }
-  
+
   showAlert() {
     let alert = this.alertCtrl.create({
       title: 'Alert!',
@@ -103,5 +113,33 @@ export class Scan {
       status = false;
     }
     return status;
+  }
+
+  private getLog() {
+    let loading = this._loadingController.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+
+    loading.present();
+
+    //Submit Barcode
+    this.api.get_log(this.token, this.user_id)
+      .then((result) => {
+        loading.dismiss();
+        this.logs = result;
+        this.parseLog();
+      }, (err) => {
+        loading.dismiss();
+        // Display submit barcode error code
+        alert(err);
+      });
+  }
+
+  private parseLog() {
+    this.logs.forEach(element => {
+      let diffInMs: number = Date.parse(element.Attendance.end_date) - Date.parse(element.Attendance.start_date);
+      element.Attendance.duration = diffInMs / 1000;
+    });
   }
 }

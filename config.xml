@@ -1,14 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="my.com.prasarana.explorail" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="my.com.prasarana.explorail" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ExploRail</name>
     <description>Another Prasarana Malaysia Berhad application.</description>
     <author email="suhaimi.maidin@prasarana.com.my" href="">SDU ICT Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
-    <allow-navigation href="http://192.168.0.101:8100" />
-    <allow-navigation href="http://192.168.43.169:8100" />
-    <allow-navigation href="http://192.168.2.1:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

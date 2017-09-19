@@ -15,6 +15,7 @@ export class Settings {
   private location: string = '';
   private token: string;
   private user_id: string;
+  private name: string;
   private debug: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public dataApi: DataApi, private nav: Nav) {
@@ -25,6 +26,7 @@ export class Settings {
     this.dataApi.update('serverPath', this.serverPath);
     this.dataApi.update('location', this.location);
     this.dataApi.update('debug', this.debug);
+    this.dataApi.update('name', this.name);
 
     if (this.debug) {
       this.token = '10010060';
@@ -44,6 +46,7 @@ export class Settings {
     }
     this.user_id = this.dataApi.get('user_id');
     this.token = this.dataApi.get('token');
+    this.name = this.dataApi.get('name');
   }
 
   showAlert() {

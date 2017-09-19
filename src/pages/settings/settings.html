@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header color="primary">
   <ion-navbar>
     <ion-title>Application Settings </ion-title>
   </ion-navbar>
@@ -13,6 +13,14 @@
     <ion-list-header>
       Settings
     </ion-list-header>
+    <ion-item>
+      <ion-note >
+        Scanner Name
+      </ion-note>
+      <ion-note >
+        {{ name }}
+      </ion-note>
+    </ion-item>
     <ion-item>
       <ion-label>Event/Game</ion-label>
       <ion-select [(ngModel)]="location">

@@ -63,4 +63,18 @@ export class Api {
         });
     });
   }
+
+  public get_log(token, user_id) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Authorization', localStorage.getItem("token"));
+
+      this.http.get(this.serverPath + '/api/get_log.json?token=' + token + '&user_id=' + user_id)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }

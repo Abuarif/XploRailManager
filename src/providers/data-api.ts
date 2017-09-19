@@ -10,6 +10,7 @@ export class DataApi {
     token: '',
     location: '',
     user_id: '',
+    name: '',
     email:''
   };
 
@@ -50,6 +51,8 @@ export class DataApi {
       this.data.user_id = temp;
     } else if (key == 'location') {
       this.data.location = temp;
+    } else if (key == 'name') {
+      this.data.name = temp;
     } else if (key == 'debug') {
       this.data.location = temp;
     }

@@ -53,6 +53,7 @@ export class Login {
     } else {
       this.dataApi.update('token', this.data.key);
       this.dataApi.update('user_id', this.data.user_id);
+      this.dataApi.update('name', this.data.name);
     }
   }
 
