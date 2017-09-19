@@ -1,11 +1,11 @@
-<ion-header color="primary">
-  <ion-navbar>
+<ion-header>
+  <ion-navbar color="primary">
     <ion-title>Application Settings </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-fab right bottom *ngIf="!debug">
+  <ion-fab right top *ngIf="!debug">
     <button ion-fab color="danger" *ngIf="token" (click)="logout()"><ion-icon name="log-out"></ion-icon></button>
     <button ion-fab color="primary" *ngIf="!token" (click)="login()"><ion-icon name="log-in"></ion-icon></button>
   </ion-fab>
@@ -14,10 +14,10 @@
       Settings
     </ion-list-header>
     <ion-item>
-      <ion-note >
+      <ion-note>
         Scanner Name
       </ion-note>
-      <ion-note >
+      <ion-note>
         {{ name }}
       </ion-note>
     </ion-item>

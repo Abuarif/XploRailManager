@@ -11,29 +11,14 @@
 <ion-content padding>
 
   <ion-card>
-    <ion-card-header>
-      Progress by Color Group
-    </ion-card-header>
+    <img src="assets/img/explorail.png"/>
     <ion-card-content>
-      <canvas #barCanvas></canvas>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      Top 15 - Group Performance
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #lineCanvas></canvas>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      Top 15 - Overall Performance
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #bar2Canvas></canvas>
+      <ion-card-title>
+        Game/Event: {{ location }}
+      </ion-card-title>
+      <p>
+        Scanner: {{ name }}
+      </p>
     </ion-card-content>
   </ion-card>
 

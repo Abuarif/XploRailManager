@@ -13,6 +13,9 @@ export class HomePage {
   @ViewChild('bar2Canvas') bar2Canvas;
   @ViewChild('lineCanvas') lineCanvas;
 
+  public location: string = '';
+  public name: string = '';
+
   barChart: any;
   bar2Chart: any;
   lineChart: any;
@@ -26,8 +29,10 @@ export class HomePage {
       this.dataApi.clear('token');
       this.dataApi.clear('user_id');
     }
+    this.location = this.dataApi.get('location');
+    this.name = this.dataApi.get('name');
   }
-  
+
   ionViewDidLoad() {
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
