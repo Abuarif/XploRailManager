@@ -30,7 +30,7 @@ export class Login {
     private dataApi: DataApi) {
     // Create FormControl to validate fields
     this.loginFormControl = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.minLength(8)]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
   }

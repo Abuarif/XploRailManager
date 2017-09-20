@@ -10,17 +10,46 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let log of logs">
-      <h2>Group</h2>
-      <p>{{ log.Group.name }} </p>
-      <h2>Event/Game</h2>
-      <p>{{ log.Attendance.name }}</p>
-      <h2>Start</h2>
-      <p>{{ log.Attendance.start_date }}</p>
-      <h2>End</h2>
-      <p>{{ log.Attendance.end_date }}</p>
-      <h2>Duration</h2>
-      <p>{{ log.Attendance.duration | secondsToTime}}</p>
-
+        <ion-row>
+            <ion-col>
+              Group
+            </ion-col>
+            <ion-col>
+              {{ log.Group.name }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Location
+            </ion-col>
+            <ion-col>
+              {{ log.Attendance.name }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Start Time
+            </ion-col>
+            <ion-col>
+              {{ log.Attendance.start_date }}
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="log.Attendance.end_date">
+            <ion-col>
+              End Time
+            </ion-col>
+            <ion-col>
+              {{ log.Attendance.end_date }}
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="log.Attendance.end_date">
+            <ion-col>
+              Duration
+            </ion-col>
+            <ion-col>
+              {{ log.Attendance.duration | secondsToTime}}
+            </ion-col>
+          </ion-row>
     </ion-item>
   </ion-list>
 </ion-content>

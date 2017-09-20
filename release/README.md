@@ -2,12 +2,11 @@
 
 ## Android
 
-### Build
+### Build for release
 
 Generate a release build for Android
 
 ```bash
-
 ionic cordova build --release android
 
 ```

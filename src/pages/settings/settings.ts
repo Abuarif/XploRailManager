@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Nav, IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { Login } from '../login/login';
-import { HomePage } from '../home/home';
 import { DataApi } from '../../providers/data-api';
 
 @IonicPage()
@@ -60,7 +59,7 @@ export class Settings {
 
   logout() {
     this.dataApi.flush();
-    this.nav.popToRoot(HomePage);
+    this.navCtrl.push(Login, {serverPath: this.serverPath});
   }
 
   login() {

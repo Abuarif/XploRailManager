@@ -27,6 +27,7 @@ export class Scan {
   public name: string = '';
   public token: string = 'test';
   public user_id: string;
+  public status: string;
 
   public logs: any;
   public data: any;
@@ -63,6 +64,11 @@ export class Scan {
     }
     if (this.location == null) {
       this.navCtrl.push(Settings);
+    }
+    if (this.location == 'Goodies Collection' || this.location == 'Event Registration') {
+      this.status = 'event';
+    } else {
+      this.status = 'game';
     }
     this.getLog();
   }
@@ -128,7 +134,9 @@ export class Scan {
       .then((result) => {
         loading.dismiss();
         this.logs = result;
-        this.parseLog();
+        // console.log(this.logs)
+        this.parseLog()
+        // console.log(this.logs)
       }, (err) => {
         loading.dismiss();
         // Display submit barcode error code
@@ -138,8 +146,11 @@ export class Scan {
 
   private parseLog() {
     this.logs.forEach(element => {
-      let diffInMs: number = Date.parse(element.Attendance.end_date) - Date.parse(element.Attendance.start_date);
-      element.Attendance.duration = diffInMs / 1000;
+      let diffInMs: number
+      if (this.logs.Attendance.end_date != '') {
+        diffInMs = Date.parse(this.logs.Attendance.end_date) - Date.parse(this.logs.Attendance.start_date);
+        this.logs.Attendance.duration = diffInMs / 1000;
+      }
     });
   }
 }

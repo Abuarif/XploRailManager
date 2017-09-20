@@ -6,50 +6,39 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-list-header>
-      Last Submission
-    </ion-list-header>
-    <ion-refresher (ionRefresh)="getAttendance($event)">
-      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
-      </ion-refresher-content>
-    </ion-refresher>
-    <ion-item class="general">
-      <h2>Group Name</h2>
-      <p> {{ lastAttendance.group }} </p>
+    <ion-item-divider>
+      Participant Game Profile
+    </ion-item-divider>
+    <ion-item>
+      <ion-note>Group Name</ion-note>
+      <ion-note item-right> {{ lastAttendance.group }} </ion-note>
     </ion-item>
-    <ion-item class="general">
-      <h2>Participant Name</h2>
-      <p> {{ lastAttendance.name }} </p>
+    <ion-item>
+      <ion-note>Participant Name</ion-note>
+      <ion-note item-right> {{ lastAttendance.name }} </ion-note>
     </ion-item>
-    <ion-item class="general">
-      <h2>NRIC/Passport No.</h2>
-      <p> {{ scannedText }} </p>
+    <ion-item>
+      <ion-note>NRIC/Passport No.</ion-note>
+      <ion-note item-right> {{ scannedText }} </ion-note>
     </ion-item>
-    <ion-item class="location">
-      <h2>Last Event/Game</h2>
-      <p> {{ lastAttendance.location }} </p>
+    <ion-item>
+      <ion-note>Last Event/Game</ion-note>
+      <ion-note item-right> {{ lastAttendance.location }} </ion-note>
     </ion-item>
-    <ion-item class="start">
-      <h2>Start Time</h2>
-      <p> {{ lastAttendance.start_date }} </p>
+    <ion-item>
+      <ion-note>Start Time</ion-note>
+      <ion-note item-right> {{ lastAttendance.start_date }} </ion-note>
     </ion-item>
-    <ion-item class="end" *ngIf="status == 'game'">
-      <h2>End Time</h2>
-      <p> {{ lastAttendance.end_date }} </p>
+    <ion-item *ngIf="status == 'game'">
+      <ion-note>End Time</ion-note>
+      <ion-note item-right> {{ lastAttendance.end_date }} </ion-note>
     </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      Current Activity
-    </ion-list-header>
-    <ion-item class="location">
-      <h2>Event/Game</h2>
-      <p> {{ location }} </p>
+    <ion-item>
+      <ion-note>Event/Game</ion-note>
+      <ion-note item-right> {{ location }} </ion-note>
     </ion-item>
   </ion-list>
-</ion-content>
-<ion-footer>
   <button ion-button full large color="secondary" (click)="submitBarcode(1)" *ngIf="displayStartButton && status == 'event'">{{ eventText }}</button>
   <button ion-button full large color="secondary" (click)="submitBarcode(1)" *ngIf="displayStartButton && status == 'game'">{{ startText }}</button>
   <button ion-button full large color="danger" (click)="submitBarcode(2)" *ngIf="displayEndButton && status == 'game'">{{ endText }}</button>
-</ion-footer>
+</ion-content>

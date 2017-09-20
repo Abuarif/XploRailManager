@@ -1,25 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-row>
-      <ion-col text-center>
-        <img src="assets/img/rapidkl.png">
-      </ion-col>
-    </ion-row>
+    <img src="assets/img/rapidkl.png">
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-row>
+    &nbsp;
+  </ion-row>
   <ion-card>
-    <img src="assets/img/explorail.png"/>
+    <img src="assets/img/explorail.png" />
     <ion-card-content>
       <ion-card-title>
-        Game/Event: {{ location }}
+        {{ location }}
       </ion-card-title>
       <p>
+        <ion-icon name="person"></ion-icon>
         Scanner: {{ name }}
       </p>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

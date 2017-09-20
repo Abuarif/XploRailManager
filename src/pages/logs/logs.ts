@@ -57,8 +57,10 @@ export class Logs {
 
   private parseLog() {
     this.logs.forEach(element => {
-      let diffInMs: number = Date.parse(element.Attendance.end_date) - Date.parse(element.Attendance.start_date);
-      element.Attendance.duration = diffInMs / 1000  ;
+      if (this.logs.Attendance.end_date != '') {
+        let diffInMs: number = Date.parse(this.logs.Attendance.end_date) - Date.parse(this.logs.Attendance.start_date);
+        this.logs.Attendance.duration = diffInMs / 1000;
+      }
     });
   }
 }
